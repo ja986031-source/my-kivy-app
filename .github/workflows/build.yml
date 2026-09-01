@@ -17,10 +17,12 @@ jobs:
 
       - name: Build APK with Buildozer
         run: |
-          buildozer -v android debug
+          echo "y" | buildozer -v android debug
+
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: my-app-apk
-          path: bin/*.app
+          path: bin/*.apk
+        
