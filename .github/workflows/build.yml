@@ -2,8 +2,7 @@ name: Build Android APK
 
 on:
   push:
-    branches: [ "main", "master" ]
-  workflow_dispatch:
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -12,17 +11,14 @@ jobs:
       image: kivy/buildozer:latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Build APK with Buildozer
-        run: |
-          echo "yes" | buildozer -v android debug
+    - name: Build APK with Buildozer
+      run: |
+        yes | buildozer -v android debug
 
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: my-app-apk
-          path: bin/*.apk
-        
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: my-app-apk
+        path: bin/*.apk
